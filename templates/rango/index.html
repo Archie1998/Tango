@@ -2,25 +2,28 @@
 {% load staticfiles %}
 
 {% block title_block %}
-Rango
+    Index
 {% endblock %}
 
 {% block body_block %}
-    <h1>Rango says...</h1>
+<div class="jumbotron">
+    <h1 class="display-3">Rango says...</h1>
     <div>
     {% if user.is_authenticated %}
-        howdy {{ user.username }}!
+        <h1>howdy {{ user.username }}!</h1>
     {% else %}
-        hey there partner!
+        <h1>hey there partner!</h1>
     {% endif %}
     </div>
-
-    <div>
+</div>
+    <div class="row marketing">
+        <div class="col-lg-6">
+    <h4>Most liked categories:</h4>
+    <p>
     {% if categories %}
-    <div>Most liked categories:</div>
-    <ul>
+    <ul class="list-group">
     {% for category in categories %}
-      <li>
+      <li class="list-group-item">
         <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
       </li>
     {% endfor %}
@@ -28,14 +31,16 @@ Rango
     {% else %}
         <strong>There are no categories present.</strong>
     {% endif %}
+    </p>
     </div>
 
-    <div>
+    <div class="col-lg-6">
+      <h4>Most viewed pages:</h4>
+      <p>
       {% if pages %}
-        <div>Most viewed pages:</div>
-        <ul>
+        <ul class="list-group">
           {% for page in pages %}
-          <li>
+          <li class="list-group-item">
           <a href="{{ page.url }}">{{ page.title }}</a>
           </li>
           {% endfor %}
@@ -43,7 +48,8 @@ Rango
       {% else %}
       <strong>There are no pages present.</strong>
       {% endif %}
-    </div>
+    </p>
+  </div>
 
     <div>
         <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" />
